@@ -1,4 +1,4 @@
-import { Send, Bot, Sparkles, MessageCircle, Clock } from 'lucide-react';
+import { Send, Bot, Sparkles, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { RegulationDocument } from '../../../types';
 
@@ -35,7 +35,7 @@ export default function RegulationChatComponent({
           </div>
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
             {documents && documents.length > 0 ? documents.map((doc, i) => (
-              <div 
+              <div
                 key={doc.id || i}
                 className="w-full text-left group"
               >
@@ -48,7 +48,7 @@ export default function RegulationChatComponent({
                       {doc.name}
                     </p>
                     <p className="mt-1 text-[10px] text-slate-400">
-                       {new Date(doc.createdAt?.toDate?.() || Date.now()).toLocaleDateString()}
+                      {new Date(doc.createdAt?.toDate?.() || Date.now()).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function RegulationChatComponent({
           <div className="flex-1 overflow-y-auto bg-slate-50/50 p-8 space-y-6 scrollbar-hide">
             <AnimatePresence mode="wait">
               {currentAnswer ? (
-                <motion.div 
+                <motion.div
                   key="answer"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -94,8 +94,8 @@ export default function RegulationChatComponent({
                       <p className="text-sm leading-relaxed">{currentAnswer.q}</p>
                     </div>
                   </div>
-                  
-                  
+
+
                   {!isPending && currentAnswer.a && (
                     <div className="flex gap-4">
                       <div className="flex-1 max-w-[85%] rounded-2xl rounded-tl-none border border-border bg-white p-5 shadow-sm">
@@ -103,7 +103,7 @@ export default function RegulationChatComponent({
                           {currentAnswer.a}
                         </div>
                         <div className="mt-4 flex items-center justify-between border-t border-slate-50 pt-3">
-                           <button 
+                          <button
                             onClick={() => setCurrentAnswer(null)}
                             className="text-[10px] font-bold uppercase tracking-widest text-brand transition-colors hover:text-brand-dark"
                           >
@@ -115,7 +115,7 @@ export default function RegulationChatComponent({
                   )}
                 </motion.div>
               ) : (
-                <motion.div 
+                <motion.div
                   key="empty"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -146,14 +146,14 @@ export default function RegulationChatComponent({
 
           <form onSubmit={onSubmit} className="border-t border-border bg-white p-6 pt-4">
             <div className="flex gap-3">
-              <input 
+              <input
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder="Pregunta sobre convivencia, ausencias, uniforme..."
                 className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-6 py-4 text-sm transition-all focus:border-brand focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-50 placeholder:text-slate-400"
                 disabled={isPending || !documents?.length}
               />
-              <button 
+              <button
                 type="submit"
                 disabled={!question.trim() || isPending || !documents?.length}
                 className="flex items-center gap-2 rounded-xl bg-brand px-6 text-sm font-bold text-white shadow-lg shadow-indigo-100 transition-all hover:scale-105 active:scale-95 disabled:opacity-50"

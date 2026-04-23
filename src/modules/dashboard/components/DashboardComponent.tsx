@@ -3,7 +3,6 @@ import {
   FileText,
   Search,
   LogOut,
-  User as UserIcon,
 } from 'lucide-react';
 import DocumentListScreen from '../../documents/screens/DocumentListScreen';
 import RegulationChatScreen from '../../ai-search/screens/RegulationChatScreen';
@@ -92,7 +91,7 @@ export default function DashboardComponent({
                 {user?.role}
               </div>
             </div>
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="flex h-9 w-9 items-center justify-center rounded-full bg-border font-bold text-slate-500 border border-slate-200 transition-all hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
             >

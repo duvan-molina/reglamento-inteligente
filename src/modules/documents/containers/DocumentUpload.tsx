@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { storage, db, auth } from '../../../lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { Upload, FileUp, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { Upload, FileUp, X, CheckCircle } from 'lucide-react';
 import * as pdfjs from 'pdfjs-dist';
 import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import { motion } from 'motion/react';

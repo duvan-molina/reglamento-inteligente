@@ -1,7 +1,7 @@
 import { LogIn } from 'lucide-react';
 import { motion } from 'motion/react';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import type { LoginFormData } from '../types';
+import type { LoginFormData } from '../types.ts';
 
 interface LoginComponentProps {
   register: UseFormRegister<LoginFormData>;

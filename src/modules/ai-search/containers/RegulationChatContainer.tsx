@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { collection, query, orderBy, getDocs, addDoc, serverTimestamp, limit } from 'firebase/firestore';
-import { db, auth } from '../../../lib/firebase';
+import { collection, query, orderBy, getDocs, limit } from 'firebase/firestore';
+import { db } from '../../../lib/firebase';
 import { askGemini } from '../../../services/geminiService';
 import { RegulationDocument } from '../../../types';
 import { useAuthStore } from '../../auth/store/authStore';
@@ -10,7 +10,7 @@ import RegulationChatComponent from '../components/RegulationChatComponent';
 export default function RegulationChatContainer() {
   const user = useAuthStore((state) => state.user);
   const [question, setQuestion] = useState('');
-  const [currentAnswer, setCurrentAnswer] = useState<{q: string, a: string} | null>(null);
+  const [currentAnswer, setCurrentAnswer] = useState<{ q: string, a: string } | null>(null);
 
   // 1. Fetch documents to use as context
   const { data: documents } = useQuery({
@@ -49,12 +49,12 @@ export default function RegulationChatContainer() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim() || chatMutation.isPending) return;
-    
+
     // Optimistic UI updates
     setCurrentAnswer({ q: question, a: '' });
     const currentQ = question;
     setQuestion('');
-    
+
     chatMutation.mutate(currentQ);
   };
 

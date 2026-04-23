@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../lib/firebase';
 import LoginComponent from '../components/LoginComponent';
-import type { LoginFormData } from '../types';
+import type { LoginFormData } from '../types.ts';
 
 export default function LoginContainer() {
   const [errorProp, setErrorProp] = useState('');
