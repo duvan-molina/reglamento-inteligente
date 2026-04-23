@@ -1,4 +1,4 @@
-import { FileText, Calendar, ExternalLink, Inbox, ShieldCheck } from 'lucide-react';
+import { FileText, Calendar, ExternalLink, Inbox, ShieldCheck, Trash2 } from 'lucide-react';
 import DocumentUpload from '../containers/DocumentUpload';
 
 interface DocumentListComponentProps {
@@ -6,6 +6,8 @@ interface DocumentListComponentProps {
   documents: any[] | undefined;
   isLoading: boolean;
   onRefetch: () => void;
+  onDelete?: (id: string, storagePath: string) => void;
+  deletingId?: string | null;
 }
 
 export default function DocumentListComponent({
@@ -13,6 +15,8 @@ export default function DocumentListComponent({
   documents,
   isLoading,
   onRefetch,
+  onDelete,
+  deletingId
 }: DocumentListComponentProps) {
   return (
     <div className="grid h-[calc(100vh-160px)] gap-8 overflow-hidden lg:grid-cols-5">
@@ -69,14 +73,29 @@ export default function DocumentListComponent({
                       </div>
                     </div>
                   </div>
-                  <a
-                    href={doc.downloadUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-slate-400 shadow-sm transition-all hover:border-brand hover:text-brand hover:shadow-indigo-100"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={doc.downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-slate-400 shadow-sm transition-all hover:border-brand hover:text-brand hover:shadow-indigo-100"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                    {isAdmin && onDelete && (
+                      <button
+                        onClick={() => onDelete(doc.id, doc.storagePath)}
+                        disabled={deletingId === doc.id}
+                        className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-slate-400 shadow-sm transition-all hover:border-red-500 hover:text-red-500 hover:bg-red-50 disabled:opacity-50"
+                      >
+                        {deletingId === doc.id ? (
+                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-slate-200 border-t-red-500"></div>
+                        ) : (
+                          <Trash2 size={16} />
+                        )}
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))
             ) : (

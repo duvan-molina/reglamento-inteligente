@@ -134,8 +134,17 @@ export default function RegulationChatComponent({
                     <div className="absolute -inset-4 rounded-full bg-indigo-50 animate-ping opacity-20"></div>
                     <MessageCircle size={80} strokeWidth={1} className="relative text-slate-200" />
                   </div>
-                  <p className="text-xl font-bold tracking-tight text-slate-400">¿En qué puedo ayudarte hoy?</p>
-                  <p className="mt-2 text-sm text-slate-400">Haz una pregunta sobre el reglamento escolar.</p>
+                  {(!documents || documents.length === 0) ? (
+                    <>
+                      <p className="text-xl font-bold tracking-tight text-slate-400">Contexto de IA Vacío</p>
+                      <p className="mt-2 text-sm text-slate-400 max-w-sm text-center">Para consultar, primero debes subir un reglamento en el módulo de Documentos.</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xl font-bold tracking-tight text-slate-400">¿En qué puedo ayudarte hoy?</p>
+                      <p className="mt-2 text-sm text-slate-400">Haz una pregunta sobre el reglamento escolar.</p>
+                    </>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -158,8 +167,8 @@ export default function RegulationChatComponent({
               <input
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Pregunta sobre convivencia, ausencias, uniforme..."
-                className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-6 py-4 text-sm transition-all focus:border-brand focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-50 placeholder:text-slate-400"
+                placeholder={(!documents || documents.length === 0) ? "Sube un reglamento para empezar..." : "Pregunta sobre convivencia, ausencias, uniforme..."}
+                className={`flex-1 rounded-xl border border-slate-200 bg-slate-50 px-6 py-4 text-sm transition-all focus:border-brand focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-50 placeholder:text-slate-400 ${(!documents || documents.length === 0) ? "cursor-not-allowed opacity-50" : ""}`}
                 disabled={isPending || !documents?.length}
               />
               <button
