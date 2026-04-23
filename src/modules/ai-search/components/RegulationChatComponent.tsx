@@ -21,6 +21,15 @@ export default function RegulationChatComponent({
   isPending,
   onSubmit,
 }: RegulationChatComponentProps) {
+  const formatResponseText = (text: string) => {
+    return text.split(/(\*\*.*?\*\*)/g).map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={index} className="font-bold text-slate-900">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
   return (
     <div className="grid h-[calc(100vh-160px)] gap-8 lg:grid-cols-4">
       {/* Left column: Documents Info */}
@@ -99,8 +108,8 @@ export default function RegulationChatComponent({
                   {!isPending && currentAnswer.a && (
                     <div className="flex gap-4">
                       <div className="flex-1 max-w-[85%] rounded-2xl rounded-tl-none border border-border bg-white p-5 shadow-sm">
-                        <div className="prose text-slate-700">
-                          {currentAnswer.a}
+                        <div className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">
+                          {formatResponseText(currentAnswer.a)}
                         </div>
                         <div className="mt-4 flex items-center justify-between border-t border-slate-50 pt-3">
                           <button
